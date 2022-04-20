@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Stylesheet" href="style.css">
+    <title>BMI-Calculator</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>BMI-Calculator</h1>
+    </header>
+
+<div class="container">    
+    <div class="wrapper">
+        
+        <div class="tabs">
+            <div class="US-tab">
+                <h2>US Units</h2>
+            </div>    
+        </div>
+         
+        <form id="form" class="form">
+            <p>Height</p>    
+            <input type="number" id="feets" placeholder="feets">
+            <span id="ft_error"></span>
+            <br>
+            <input type="number" id="inches" placeholder="inches">
+            <span id="in_error"></span>
+        
+            <p>Weight</p>    
+            <input type="number" id="weight" placeholder="pounds">
+            <span id="w_error"></span>
+        </form>
+
+        <!--<form id="form" class="form">
+            <p>Height</p>    
+            <input type="number" id="cm" placeholder="cm">
+            <span id="ft_error"></span>
+            
+            <p>Weight</p>    
+            <input type="number" id="Kg" placeholder="Kg">
+            <span id="w_error"></span>
+        </form>-->
+        
+        <div class="buttons">
+            <button id="button">Calculate</button>
+            <button id="clear">Clear</button>
+        </div>
+
+        <div class="result">
+            <p>Your BMI:</p>
+            <p id="output"></p>
+        </div>
+
+    </div>
+</div>
+
+    <script src="script.js" ></script>
+
+</body>
+</html>
