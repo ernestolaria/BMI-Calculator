@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+
 *{
     padding: 0;
     margin: 0;
@@ -7,36 +9,134 @@
 body{
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
     background-color: black;
-    color: aquamarine
-}  
-
-header{
+    color: aquamarine;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 50px;
-}
+    min-height: 100vh;
+    
+}  
 
 .container{
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-}
-
-.wrapper{
-    max-width: 1000px;
     background: #111;
-    width: 500px;
-    height: 500px;
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 450px;
+    height:600px;  
 }
 
 .tabs{
-    background: #222;
+    background: #444;
     display: flex;
+    width: 100%;
     align-items: center;
+    cursor: pointer;
 }
+
+.tabs .tab{
+    padding: .9rem 2rem;
+    width: 100%; 
+}
+
+.active-tab{
+    background: #222;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.input{
+    padding: 25px 80px;
+}
+
+.form-control{
+    margin-bottom: 10px; 
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.US-height-control{
+    display: flex;
+    width: 100%;
+}
+
+.ft-control{
+    margin-right: 6px;
+}
+
+.in-control{
+    margin-right: 6px;
+}
+
+.form-control p{
+    margin-top: 30px;
+    margin-bottom: 5px;
+    font-size: 28px;
+    text-align: center; 
+}
+
+.form-control input{
+    border-radius: 8px;
+    border-style: none;
+    margin-top: 5px;
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+}
+
+.form-control span{
+    position: absolute;
+    display: block;
+    margin-top: 7px;
+    font-size: 15px;
+    font-weight: 100;
+    color: yellow;
+    
+}
+
+.buttons{
+   margin-top: 35px; 
+}
+
+.button{
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px;
+    width: 48.7%;
+    border-radius: 8px;
+    border-style: none;
+    cursor: pointer;
+}  
+
+.result{
+    margin-top: 45px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+#US-bmi, #metric-bmi{
+    display: none;
+}
+
+.show-active{
+    display: block!important;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

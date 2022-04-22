@@ -1,9 +1,18 @@
 
-let button = document.getElementById('button');
+const tab = document.querySelectorAll('.tab');
+const US_bmi = document.getElementById('US-bmi');
+const M_bmi = document.getElementById('metric-bmi');
+let calculate = document.getElementById('calculate');
 let clear = document.getElementById('clear');
+let active;
 
 //event listeners
-button.addEventListener('click', perform);
+window.addEventListener('DOMContentLoaded', () => {
+    US_bmi.classList.add('show-active');
+    active = "US-bmi";
+});
+
+calculate.addEventListener('click', perform);
     
 clear.addEventListener('click', () => {
     let forms = [...document.forms];
@@ -16,7 +25,38 @@ function clearInfo(){
     document.getElementById('output').innerHTML = '';
     document.getElementById('ft_error').innerHTML = '';
     document.getElementById('in_error').innerHTML = '';
-    document.getElementById('w_error').innerHTML = '';
+    document.getElementById('p_error').innerHTML = '';
+    document.getElementById('cm_error').innerHTML = '';
+    document.getElementById('kg_error').innerHTML = '';
+}
+
+// bmi calculation form toggle
+tab.forEach(bmiTab => {
+    bmiTab.addEventListener('click', () => {
+        if(bmiTab.id === "US-tab"){
+            removeActiveClass();
+            clearInfo();
+            bmiTab.classList.add('active-tab');
+            M_bmi.classList.remove('show-active');
+            US_bmi.classList.add('show-active');
+            active = "US-bmi";
+        }
+        if(bmiTab.id === "metric-tab"){
+            removeActiveClass();
+            clearInfo();
+            bmiTab.classList.add('active-tab');
+            US_bmi.classList.remove('show-active');
+            M_bmi.classList.add('show-active');
+            active = "metric-bmi";
+        }
+    });
+});
+
+// remove active class from heads
+function removeActiveClass(){
+    tab.forEach(bmiTab => {
+        bmiTab.classList.remove('active-tab');
+    });
 }
 
 //perform the action (calculate, or print the wrong entry if needed)
@@ -34,59 +74,107 @@ function perform(){
 
 //get the inputs from the user
 function getInputs(status){
+    let weight;
+    let height;
 
-    let feets = parseFloat(document.getElementById('feets').value);
-    let inches = parseFloat(document.getElementById('inches').value);
-    let weight = parseFloat(document.getElementById('weight').value);
-    let ft_status=false, in_status=false, w_status=false;
+    //getting inputs from US-units
+    if(active === "US-bmi"){
+
+        let feets = parseFloat(document.getElementById('feets').value);
+        let inches = parseFloat(document.getElementById('inches').value);
+        let pounds = parseFloat(document.getElementById('pounds').value);
+        let ft_status=false, in_status=false, w_status=false;
     
-    if(feets === '' || (feets <=0) || isNaN(feets)){
-        document.getElementById('ft_error').innerHTML = 'wrong entry';
-    }else{
-        document.getElementById('ft_error').innerHTML = '';
-        ft_status = true;
-    }
+        //check for feets
+        if(feets === '' || (feets <=0) || isNaN(feets)){
+            document.getElementById('ft_error').innerText = 'check feets';
+        }else{
+            document.getElementById('ft_error').innerText = '';
+            ft_status = true;
+        }
 
-    if(inches <0){
-        document.getElementById('in_error').innerHTML = 'wrong entry';
-    }else if(inches === '' || isNaN(inches)){
-        inches = 0;
-        document.getElementById('in_error').innerHTML = '';
-        in_status = true
-    }else{
-        document.getElementById('in_error').innerHTML = '';
-        in_status = true
-    }
+        //check for inches (note that inches can be 0)
+        if(inches === '' || (inches <0) || isNaN(inches)){
+            document.getElementById('in_error').innerText = 'check inches';
+        }else{
+            document.getElementById('in_error').innerText = '';
+            in_status = true
+        }
 
-    if(weight === '' || (weight <=0) || isNaN(weight)){
-        document.getElementById('w_error').innerHTML = 'wrong entry';
-    }else{
-        document.getElementById('w_error').innerHTML = '';
-        w_status = true
-    }
+        //check for weight in pounds
+        if(pounds === '' || (pounds <=0) || isNaN(pounds)){
+            document.getElementById('p_error').innerText = 'check pounds';
+        }else{
+            document.getElementById('p_error').innerText = '';
+            w_status = true
+        }
     
-    if(ft_status==true && in_status==true && w_status==true ){
+        if(ft_status==true && in_status==true && w_status==true ){
         
-        let heigth = (feets * 12) + inches;
+            height = (feets * 12) + inches;
+            weight = pounds;
 
-        calculateBMI(heigth, weight);
+            calculateBMI(weight, height);
     
-    }else{
-        status = false;
-    } 
+        }else{
+            
+            return status = false;
+        } 
+        
+    }else{  
 
-    return status;
+        //getting inputs from Metric-units
+        let cm = parseFloat(document.getElementById('cm').value);
+        let kg = parseFloat(document.getElementById('kg').value);
+        let cm_status=false, kg_status=false;
     
+        //check for cm
+        if(cm === '' || (cm <=0) || isNaN(cm)){
+            document.getElementById('cm_error').innerText = 'check cm';
+        }else{
+            document.getElementById('cm_error').innerText = '';
+            cm_status = true;
+        }
+
+        //check for weight in kg
+        if(kg === '' || (kg <=0) || isNaN(kg)){
+            document.getElementById('kg_error').innerText = 'check kg';
+        }else{
+            document.getElementById('kg_error').innerText = '';
+            kg_status = true
+        }
+    
+        if(cm_status==true && kg_status==true ){
+        
+            height = cm / 100;
+            weight = kg;
+
+            calculateBMI(weight, height);
+    
+        }else{
+            
+            return status = false;
+        } 
+
+    }
 }
 
 
 //calculate the bmi
-function calculateBMI(heigth, weight){
+function calculateBMI(weight, height){
 
-    let bmi = ((weight / Math.pow(heigth, 2)) * 703).toFixed(1);
+    if(active === "US-bmi"){
+
+        let bmi = ((weight / Math.pow(height, 2)) * 703).toFixed(1);
+        printResult(bmi);
     
-    printResult(bmi);
-    
+    }else{
+
+        let bmi = (weight / Math.pow(height, 2)).toFixed(1);
+        printResult(bmi);
+        
+    }
+
 }
 
 
@@ -96,15 +184,15 @@ function printResult(bmi){
     let output = document.getElementById('output');
     
     if (bmi < 18.5) {
-        output.innerHTML = bmi + ' Under weight.';
+        output.innerHTML = 'Your BMI is: ' + '<br>' + bmi + '<br>' + '**Under weight**';
     }else if (bmi >= 18.6 && bmi < 24.9) {
-        output.innerHTML = bmi + ' Normal.';
+        output.innerHTML = 'Your BMI is: ' + '<br>' + bmi + '<br>' + '**Normal**';
     }else if(bmi >= 24.9 && bmi < 29.9){
-        output.innerHTML = bmi + ' Over weight.';
+        output.innerHTML = 'Your BMI is: ' + '<br>' + bmi + '<br>' + '**Over weight**';
     }else if(bmi > 29.9){
-        output.innerHTML = bmi + ' Obese.';
+        output.innerHTML = 'Your BMI is: ' + '<br>' + bmi + '<br>' + '**Obese**';
     }else{
-        output.innerHTML = 'check your entry';
+        output.innerText = 'check your entry';
     }
     
 }
