@@ -16,8 +16,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    
+    min-height: 100vh;   
+
 }  
 
 .container{
@@ -26,7 +26,7 @@ body{
     border-radius: 10px;
     overflow: hidden;
     width: 450px;
-    height:600px;  
+    height:620px;  
 }
 
 .tabs{
@@ -34,6 +34,7 @@ body{
     display: flex;
     width: 100%;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
 
@@ -128,6 +129,25 @@ body{
     display: block!important;
 }
 
+
+@media (max-width: 500px) {
+    .tabs h3{
+        font-size: 18px;
+    } 
+    .container{
+        width: 340px;
+        height:580px;  
+    }
+    .container p{
+        font-size: 25px;
+    }
+    .input{
+        padding: 20px 50px;
+    }
+    .result p{
+        font-size: 18px;
+    }
+}  
 
 
 
