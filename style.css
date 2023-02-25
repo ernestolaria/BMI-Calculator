@@ -16,8 +16,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;   
-
+    height: 100vh;
 }  
 
 .container{
@@ -95,8 +94,7 @@ body{
     margin-top: 7px;
     font-size: 15px;
     font-weight: 100;
-    color: yellow;
-    
+    color: yellow;    
 }
 
 .buttons{
