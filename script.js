@@ -130,7 +130,7 @@ function getInputs(status){
     
         //check for cm
         if(cm === '' || (cm <=0) || isNaN(cm)){
-            document.getElementById('cm_error').innerText = 'check for cm';
+            document.getElementById('cm_error').innerText = 'check cm';
         }else{
             document.getElementById('cm_error').innerText = '';
             cm_status = true;
